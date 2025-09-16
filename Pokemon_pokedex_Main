@@ -1,0 +1,46 @@
+import pokebase as pb
+import requests
+from Poke_Functions import *
+
+
+
+
+def main():
+    while True:
+        choice = input("What would you like to do? (1) Basic Pokémon info (2) Type effectiveness (3) Evolution chain (4) Learnable moves (5) Find Pokémon location (q to quit): ").strip().lower()
+        if choice == '1':
+            pokemon_basics()
+        elif choice == '2':
+            poke = input("Which pokemon are you looking for?\n").lower()
+            is_variant = input("Is this a variant (e.g., alolan, galarian, etc.)? (y/n): ").lower()
+            if is_variant == 'y':
+                variant_name = input("Please specify the variant (e.g., alola, galar, hisui): ").lower()
+                poke_full = f"{poke}-{variant_name}"
+            else:
+                poke_full = poke
+            show_type_effectiveness(poke_full)
+        elif choice == '3':
+            print_evolution_chain()
+        elif choice == '4':
+            print_learnable_moves()
+        elif choice == '5':
+            poke = input("Which pokemon are you looking for?\n").lower()
+            is_variant = input("Is this a variant (e.g., alolan, galarian, etc.)? (y/n): ").lower()
+            if is_variant == 'y':
+                variant_name = input("Please specify the variant (e.g., alola, galar, hisui): ").lower()
+                poke_full = f"{poke}-{variant_name}"
+            else:
+                poke_full = poke
+            game = input("Which game are you interested in? (e.g., sword, shield, platinum): ").lower()
+            find_pokemon_location(poke_full, game)
+        elif choice == 'q':
+            break
+        else:
+            print("Invalid option. Please enter 1, 2, 3, 4, 5, or q.")
+            continue
+
+        again = input("Would you like to search for other information? (y/n): ").strip().lower()
+        if again != 'y':
+            break
+
+main()
